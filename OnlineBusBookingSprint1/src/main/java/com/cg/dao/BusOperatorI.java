@@ -17,7 +17,7 @@ public interface BusOperatorI extends JpaRepository<BusOperator, Integer> {
 	//public BusOperator singIn(BusOperator busoperator);
 	//public BusOperator singOut(BusOperator busoperator);
 	
-	public void addBusOperator(BusOperator busoperator);
+	//public void addBusOperator(BusOperator busoperator);
 	
 
 }

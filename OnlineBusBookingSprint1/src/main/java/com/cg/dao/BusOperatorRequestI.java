@@ -1,5 +1,9 @@
 package com.cg.dao;
 
-public interface BusOperatorRequestI {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cg.entities.BusOperatorRequest;
+
+public interface BusOperatorRequestI  extends JpaRepository<BusOperatorRequest, Integer>{
 
 }

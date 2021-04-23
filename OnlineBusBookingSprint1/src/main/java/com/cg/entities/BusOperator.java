@@ -2,7 +2,8 @@ package com.cg.entities;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -13,7 +14,7 @@ import java.util.List;
 @Table(name = "busoperator4")
 public class BusOperator {
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int busopeartorId;
 	private String busOperatorUsername;
 	private String passowrd;

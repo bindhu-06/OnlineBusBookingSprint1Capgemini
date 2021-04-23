@@ -1,5 +1,9 @@
 package com.cg.dao;
 
-public interface BusRouteI {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cg.entities.BusRoute;
+
+public interface BusRouteI extends JpaRepository<BusRoute, Integer> {
 
 }
