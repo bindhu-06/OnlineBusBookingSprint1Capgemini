@@ -1,8 +1,6 @@
 package com.cg.exception;
 
-
-
-public class BusNotFoundException  extends RuntimeException{
+public class BusNotFoundException extends RuntimeException {
 
 	public BusNotFoundException() {
 		super();
@@ -10,7 +8,7 @@ public class BusNotFoundException  extends RuntimeException{
 
 	public BusNotFoundException(String message) {
 		super(message);
-		
+
 	}
 
 }
