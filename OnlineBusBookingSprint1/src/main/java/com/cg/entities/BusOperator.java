@@ -17,7 +17,7 @@ public class BusOperator {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int busopeartorId;
 	private String busOperatorUsername;
-	private String passowrd;
+	private String password;
 	
 	//private List<Integer> caseNumber; // Inorder to cancel bus or update bus route or fare
 	
@@ -26,12 +26,12 @@ public class BusOperator {
 	private List<Bus> bus;
 
 
-	public BusOperator(int busopeartorId, String busOperatorUsername, String passowrd,
+	public BusOperator(int busopeartorId, String busOperatorUsername, String password,
 			List<Bus> bus) {
 		super();
 		this.busopeartorId = busopeartorId;
 		this.busOperatorUsername = busOperatorUsername;
-		this.passowrd = passowrd;
+		this.password = password;
 		
 		this.bus = bus;
 	}
@@ -63,13 +63,13 @@ public class BusOperator {
 	}
 
 
-	public String getPassowrd() {
-		return passowrd;
+	public String getPassword() {
+		return password;
 	}
 
 
-	public void setPassowrd(String passowrd) {
-		this.passowrd = passowrd;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 
