@@ -2,6 +2,7 @@ package com.cg.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,7 @@ public class BusOperatorRequest {
 	private String requestFor; // Possible values deleteBus,update Fare,Change Route , Change Time
 	private boolean status; // approved = true , unapproved = false
 	private LocalDate requestDate;
-	@OneToOne(mappedBy="busOperatorRequest")
+	@OneToOne(cascade=CascadeType.ALL )
 	private Bus bus;
 	public BusOperatorRequest(int busoperatorrequestId, int caseNumber, String busOperatorUsername, String requestMsg,
 			String requestFor, boolean status, LocalDate requestDate, Bus bus) {

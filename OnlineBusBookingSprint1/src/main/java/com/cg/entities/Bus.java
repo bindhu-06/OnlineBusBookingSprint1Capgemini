@@ -22,27 +22,17 @@ private int busId;
 	private BusRoute busRoute;
 	private int totalSeats;
 	private int fare;
-	@ManyToOne
-	@JoinColumn(name="busoperatorId",referencedColumnName = "busopeartorId")
-	private  BusOperator busOperator;
-	
-	@OneToOne
-	@JoinColumn(name="busoperatorrequestId")
-	private BusOperatorRequest busOperatorRequest;
-	public Bus(int busId, String busNumber, BusRoute busRoute, int totalSeats, int fare, BusOperator busOperator,
-			BusOperatorRequest busOperatorRequest) {
+	public Bus(int busId, String busNumber, BusRoute busRoute, int totalSeats, int fare) {
 		super();
 		this.busId = busId;
 		this.busNumber = busNumber;
 		this.busRoute = busRoute;
 		this.totalSeats = totalSeats;
 		this.fare = fare;
-		this.busOperator = busOperator;
-		this.busOperatorRequest = busOperatorRequest;
 	}
 	public Bus() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	public int getBusId() {
 		return busId;
@@ -74,23 +64,9 @@ private int busId;
 	public void setFare(int fare) {
 		this.fare = fare;
 	}
-	public BusOperator getBusOperator() {
-		return busOperator;
-	}
-	public void setBusOperator(BusOperator busOperator) {
-		this.busOperator = busOperator;
-	}
-	public BusOperatorRequest getBusOperatorRequest() {
-		return busOperatorRequest;
-	}
-	public void setBusOperatorRequest(BusOperatorRequest busOperatorRequest) {
-		this.busOperatorRequest = busOperatorRequest;
-	}
-	@Override
-	public String toString() {
-		return "Bus [busId=" + busId + ", busNumber=" + busNumber + ", busRoute=" + busRoute + ", totalSeats="
-				+ totalSeats + ", fare=" + fare + ", busOperator=" + busOperator + ", busOperatorRequest="
-				+ busOperatorRequest + "]";
-	}
-
+	
 }
+	
+	
+	
+	

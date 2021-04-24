@@ -17,17 +17,17 @@ public class BusRoute {
 	private String source;
 	private String destination;
 	
-	@OneToOne(mappedBy="busRoute")
+	
   
-	private Bus bus;
 
-	public BusRoute(int busrouteId, String routeName, String source, String destination, Bus bus) {
+
+	public BusRoute(int busrouteId, String routeName, String source, String destination) {
 		super();
 		this.busrouteId = busrouteId;
 		this.routeName = routeName;
 		this.source = source;
 		this.destination = destination;
-		this.bus = bus;
+		
 	}
 
 	public BusRoute() {
@@ -67,17 +67,4 @@ public class BusRoute {
 		this.destination = destination;
 	}
 
-	public Bus getBus() {
-		return bus;
 	}
-
-	public void setBus(Bus bus) {
-		this.bus = bus;
-	}
-
-	@Override
-	public String toString() {
-		return "BusRoute [busrouteId=" + busrouteId + ", routeName=" + routeName + ", source=" + source
-				+ ", destination=" + destination + ", bus=" + bus + "]";
-	}
-}

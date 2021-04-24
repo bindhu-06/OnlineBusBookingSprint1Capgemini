@@ -1,12 +1,15 @@
 package com.cg.entities;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
 
 import java.util.List;
 
@@ -16,13 +19,17 @@ public class BusOperator {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int busopeartorId;
+	@Column(unique=true)
+	@NotEmpty(message="username should not be empty")
+	
 	private String busOperatorUsername;
+	@NotEmpty(message="password should not be empty")
 	private String password;
 	
 	//private List<Integer> caseNumber; // Inorder to cancel bus or update bus route or fare
 	
 
-	@OneToMany(mappedBy="busOperator",cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Bus> bus;
 
 
