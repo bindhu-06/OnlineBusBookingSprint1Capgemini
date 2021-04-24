@@ -87,7 +87,7 @@ catch(InvalidBusOperatorException exception) {
  
  
 @GetMapping(value="/getrevenuebyroutename/{routeName}")
-public List<Booking> getRevenueByBusRoute(@PathVariable String routeName)
+public List<Booking> getRevenueByBusRoute(@Valid @PathVariable String routeName)
 {
 	try {
 	
@@ -112,10 +112,17 @@ public List<Booking> getRevenueByBusRoute(@PathVariable String routeName)
    */
 
 @GetMapping(value="/getmonthlyrevenuebyroutename/{routeName}/month/{month}")
-public List<Booking>getMonthlyRevenueByBusRoute (@PathVariable String routeName,@PathVariable int month)
+public List<Booking>getMonthlyRevenueByBusRoute (@Valid @PathVariable String routeName,@PathVariable int month)
 {
-	
-	return busoperatorserviceimpl.getMonthlyRevenueByBusRoute(routeName, month);
+	try {
+		
+		List<Booking> monthlyrevenuebyroutename =busoperatorserviceimpl.getMonthlyRevenueByBusRoute(routeName,month);
+		return monthlyrevenuebyroutename;
+		}
+		catch(InvalidRouteNameException exception)
+		{
+			throw new InvalidRouteNameException ("no Route found");
+		}
 	
 }
 
@@ -130,11 +137,17 @@ public List<Booking>getMonthlyRevenueByBusRoute (@PathVariable String routeName,
    */
 
 @GetMapping(value="/getdaterevenuebyroutename/{routeName}/date/{date}")
-public List<Booking>getRevenueByBusRouteAndDate (@PathVariable String routeName,@PathVariable String  date)
+public List<Booking>getRevenueByBusRouteAndDate (@Valid @PathVariable String routeName,@PathVariable String  date)
 {
-
-	LocalDate dt = LocalDate.parse(date);
-	return busoperatorserviceimpl.getRevenueByBusRouteAndDate(routeName, dt);
+	try {
+		LocalDate dt = LocalDate.parse(date);
+		List<Booking> revenuebyroutenameandDate =busoperatorserviceimpl.getRevenueByBusRouteAndDate(routeName, dt);
+		return revenuebyroutenameandDate;
+		}
+		catch(InvalidRouteNameException exception)
+		{
+			throw new InvalidRouteNameException ("no Route found");
+		}
 	
 }
 
@@ -150,10 +163,18 @@ public List<Booking>getRevenueByBusRouteAndDate (@PathVariable String routeName,
 
 
 @GetMapping(value="/getyearlyrevenuebyroutename/{routeName}/year/{year}")
-public List<Booking>getYearlyRevenueByBusRoute(@PathVariable String routeName,@PathVariable int year)
+public List<Booking>getYearlyRevenueByBusRoute(@Valid @PathVariable String routeName,@PathVariable int year)
 {
 	
-	return busoperatorserviceimpl.getYearlyRevenueByBusRoute(routeName, year);
+	try {
+		
+		List<Booking> yearlyrevenuebyroutename =busoperatorserviceimpl.getYearlyRevenueByBusRoute(routeName,year);
+		return yearlyrevenuebyroutename ;
+		}
+		catch(InvalidRouteNameException exception)
+		{
+			throw new InvalidRouteNameException ("no Route found");
+		}
 	
 }
  /*************************
@@ -166,9 +187,27 @@ public List<Booking>getYearlyRevenueByBusRoute(@PathVariable String routeName,@P
   */
   
 @PostMapping(value="/addNewBus")
-public ResponseEntity<Object>addBus(@RequestBody BusDto busdto)
+public ResponseEntity<Object>addBus(@Valid @RequestBody BusDto busdto,BindingResult  bindingresult)
 {
-	busoperatorserviceimpl.addBus(busdto);
+	if (bindingresult.hasErrors()) {
+		System.out.println("Some errors exist!");
+		List<FieldError> fieldErrors = bindingresult.getFieldErrors();
+
+		List<String> errMessages = new ArrayList<>();
+		for (FieldError fe : fieldErrors) {
+			errMessages.add(fe.getDefaultMessage());
+		}
+		throw new BusOperatorValidationException(errMessages);
+		
+	}
+ try {
+	 busoperatorserviceimpl.addBus(busdto);
+ }
+ 
+catch(InvalidBusOperatorException exception) {
+throw new InvalidBusOperatorException("one or more entered field contains invalid object");
+
+}
 	return new ResponseEntity<Object>("Added successfully", HttpStatus.CREATED);
 
 }
@@ -183,17 +222,62 @@ public ResponseEntity<Object>addBus(@RequestBody BusDto busdto)
   */
 
 @PostMapping(value="/addNewBusRoute")
-public ResponseEntity<Object>addBusRoute(@RequestBody BusRouteDto busroutedto)
+public ResponseEntity<Object>addBusRoute(@Valid @RequestBody BusRouteDto busroutedto,BindingResult  bindingresult)
 {
-	busoperatorserviceimpl.addBusRoute(busroutedto);
+	if (bindingresult.hasErrors()) {
+	System.out.println("Some errors exist!");
+	List<FieldError> fieldErrors = bindingresult.getFieldErrors();
+
+	List<String> errMessages = new ArrayList<>();
+	for (FieldError fe : fieldErrors) {
+		errMessages.add(fe.getDefaultMessage());
+	}
+	throw new BusOperatorValidationException(errMessages);
+	
+}
+try {
+ busoperatorserviceimpl.addBusRoute(busroutedto);
+}
+
+catch(InvalidBusOperatorException exception) {
+throw new InvalidBusOperatorException("one or more entered field contains invalid object");
+
+}
 	return new ResponseEntity<Object>("Added successfully", HttpStatus.CREATED);
 }
 	
+ /***********************************
+  * Method: updatepassword
+  * Description: Method is created to update UserName
+  * @param UserName
+  * @param password
+  * @return ResponseEntity
+  * @PutMapping : Annotation for mapping HTTP PUT requests onto update password
+  */
 
 @PutMapping(value="/updatePassword/{UserName}")
-public ResponseEntity<Object>updatepassword(@PathVariable String UserName, @RequestBody  String password)
+public ResponseEntity<Object>updatepassword(@Valid @PathVariable String UserName, @RequestBody  String password,BindingResult  bindingresult)
 {
-	busoperatorserviceimpl.updatePassword(UserName, password);
+	if (bindingresult.hasErrors()) {
+		System.out.println("Some errors exist!");
+		List<FieldError> fieldErrors = bindingresult.getFieldErrors();
+
+		List<String> errMessages = new ArrayList<>();
+		for (FieldError fe : fieldErrors) {
+			errMessages.add(fe.getDefaultMessage());
+		}
+		throw new BusOperatorValidationException(errMessages);
+		
+	}
+	try {
+	 busoperatorserviceimpl.updatePassword(UserName, password);
+	}
+
+	catch(InvalidBusOperatorException exception) {
+	throw new InvalidBusOperatorException("one or more entered field contains invalid object");
+
+	}
+	
 	return new ResponseEntity<Object>("Updatedsuccessfully", HttpStatus.OK);
 }
 

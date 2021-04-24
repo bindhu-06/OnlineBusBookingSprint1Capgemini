@@ -1,6 +1,7 @@
 package com.cg.dto;
 
 public class BusDto {
+	
 	private  String busNumber;
  private int fare;
  private int totalSeats;

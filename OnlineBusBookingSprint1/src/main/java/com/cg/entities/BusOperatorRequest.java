@@ -9,26 +9,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name="busoperatorrequest4")
 public class BusOperatorRequest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int busoperatorrequestId;
-	
-	private int caseNumber;
+	@NotEmpty(message="busoperator username should not be empty")
 	private String busOperatorUsername;
+	@NotEmpty(message="request messeage should not be empty")
 	private String requestMsg;
+	@NotEmpty(message="request for message should not be empty")
 	private String requestFor; // Possible values deleteBus,update Fare,Change Route , Change Time
+	@NotEmpty(message="status should not be empty")
 	private boolean status; // approved = true , unapproved = false
+	@NotEmpty(message="date should not be empty")
 	private LocalDate requestDate;
 	@OneToOne(cascade=CascadeType.ALL )
 	private Bus bus;
-	public BusOperatorRequest(int busoperatorrequestId, int caseNumber, String busOperatorUsername, String requestMsg,
+	public BusOperatorRequest(int busoperatorrequestId, String busOperatorUsername, String requestMsg,
 			String requestFor, boolean status, LocalDate requestDate, Bus bus) {
 		super();
 		this.busoperatorrequestId = busoperatorrequestId;
-		this.caseNumber = caseNumber;
 		this.busOperatorUsername = busOperatorUsername;
 		this.requestMsg = requestMsg;
 		this.requestFor = requestFor;
@@ -38,7 +41,6 @@ public class BusOperatorRequest {
 	}
 	public BusOperatorRequest() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public int getBusoperatorrequestId() {
 		return busoperatorrequestId;
@@ -46,12 +48,7 @@ public class BusOperatorRequest {
 	public void setBusoperatorrequestId(int busoperatorrequestId) {
 		this.busoperatorrequestId = busoperatorrequestId;
 	}
-	public int getCaseNumber() {
-		return caseNumber;
-	}
-	public void setCaseNumber(int caseNumber) {
-		this.caseNumber = caseNumber;
-	}
+	
 	public String getBusOperatorUsername() {
 		return busOperatorUsername;
 	}
@@ -87,12 +84,6 @@ public class BusOperatorRequest {
 	}
 	public void setBus(Bus bus) {
 		this.bus = bus;
-	}
-	@Override
-	public String toString() {
-		return "BusOperatorRequest [busoperatorrequestId=" + busoperatorrequestId + ", caseNumber=" + caseNumber
-				+ ", busOperatorUsername=" + busOperatorUsername + ", requestMsg=" + requestMsg + ", requestFor="
-				+ requestFor + ", status=" + status + ", requestDate=" + requestDate + ", bus=" + bus + "]";
 	}
 	
 

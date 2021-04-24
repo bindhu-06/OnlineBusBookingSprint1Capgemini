@@ -25,10 +25,6 @@ public class BusOperator {
 	private String busOperatorUsername;
 	@NotEmpty(message="password should not be empty")
 	private String password;
-	
-	//private List<Integer> caseNumber; // Inorder to cancel bus or update bus route or fare
-	
-
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Bus> bus;
 
@@ -39,14 +35,13 @@ public class BusOperator {
 		this.busopeartorId = busopeartorId;
 		this.busOperatorUsername = busOperatorUsername;
 		this.password = password;
-		
 		this.bus = bus;
 	}
 
 
 	public BusOperator() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 
 

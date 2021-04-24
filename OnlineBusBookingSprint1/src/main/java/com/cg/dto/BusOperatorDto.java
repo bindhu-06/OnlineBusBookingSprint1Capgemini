@@ -12,7 +12,7 @@ public class BusOperatorDto {
 	}
 	public BusOperatorDto() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	public String getUserId() {
 		return userId;

@@ -7,19 +7,21 @@ import javax.persistence.Id;
 
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name="busroute4")
 public class BusRoute {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private  int busrouteId;
+	@NotEmpty(message="routename should not be empty")
+	
 	private String routeName ;
+	@NotEmpty(message="source should not be empty")
+	
 	private String source;
+	@NotEmpty(message="destination should not be empty")
 	private String destination;
-	
-	
-  
-
 
 	public BusRoute(int busrouteId, String routeName, String source, String destination) {
 		super();
@@ -32,7 +34,7 @@ public class BusRoute {
 
 	public BusRoute() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public int getBusrouteId() {

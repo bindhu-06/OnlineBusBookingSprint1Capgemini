@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
@@ -22,22 +23,38 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Booking {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-
+	@Column(unique=true)
+	@NotEmpty(message="bookingid should not be empty")
+	
 	private int bookingId; // busoperatorid+busid+date+time+uniqueNumber
+	@NotEmpty(message="username should not be empty")
+	
 	private String username; // login-username
-	//private List<Pessenger> pessengersInfo;
+	@NotEmpty(message="busnumber should not be empty")
+	
 	private String busNumber;
+	@NotEmpty(message="sourceshould not be empty")
+	
 	private String source;
+	@NotEmpty(message="destination should not be empty")
+	
 	private String destination;
+	@NotEmpty(message="no of seats should not be empty")
+	
 	private int numberOfSeats;
+	@NotEmpty(message="amount to be paid should not be empty")
+	
 	private int amountPaid;
 	@Column(name="dataOfBooking")
+	@NotEmpty(message="date should not be empty")
+	
 	private LocalDate date;
+	@NotEmpty(message=" journey Start Time should not be empty")
+	
 	private LocalTime journeyStartTime;
+	@NotEmpty(message=" journey endTime should not be empty")
 	private LocalTime journeyEndTime;
-	//@ManyToOne
-	//@JoinColumn(name="user_id")
-	//private User user;
+	
 	
 		public Booking(int bookingId, String username, String busNumber, String source, String destination,
 			int numberOfSeats, int amountPaid, LocalDate date, LocalTime journeyStartTime, LocalTime journeyEndTime) {
@@ -52,7 +69,7 @@ public class Booking {
 		this.date = date;
 		this.journeyStartTime = journeyStartTime;
 		this.journeyEndTime = journeyEndTime;
-		//this.user = user;
+		
 	}
 
 		
@@ -69,12 +86,7 @@ public class Booking {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	/*public List<Pessenger> getPessengersInfo() {
-		return pessengersInfo;
-	}
-	public void setPessengersInfo(List<Pessenger> pessengersInfo) {
-		this.pessengersInfo = pessengersInfo;
-	}*/
+	
 	public String getBusNumber() {
 		return busNumber;
 	}
