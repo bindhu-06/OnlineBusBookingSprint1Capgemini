@@ -1,7 +1,11 @@
 package com.cg.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class BusOperatorDto {
+	@NotEmpty(message = "username should not be empty")
 	private String userId;
+	@NotEmpty(message = "password should not be empty")
 	private String password;
 
 	public BusOperatorDto(String userId, String password) {

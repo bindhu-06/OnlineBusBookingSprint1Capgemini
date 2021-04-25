@@ -1,9 +1,13 @@
 package com.cg.dto;
 
-public class BusRouteDto {
+import javax.validation.constraints.NotEmpty;
 
+public class BusRouteDto {
+	@NotEmpty(message = "routename should not be empty")
 	private String routeName;
+	@NotEmpty(message = "source should not be empty")
 	private String source;
+	@NotEmpty(message = "destination should not be empty")
 	private String destination;
 
 	public BusRouteDto(String routeName, String source, String destination) {

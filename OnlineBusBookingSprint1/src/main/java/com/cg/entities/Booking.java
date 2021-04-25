@@ -10,6 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+/******************************************************
+ * @author Bindhu Pandrangi
+ * 
+ * Description : This class is used fo entity mapping and generate getters and setter for Booking.
+ * 
+ */
 @Entity
 @Table(name="booking4")
 
@@ -19,35 +25,35 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 
 	@Column(unique = true)
-	@NotEmpty(message = "bookingid should not be empty")
+	//@NotEmpty(message = "bookingid should not be empty")
 	private int bookingId; // busoperatorid+busid+date+time+uniqueNumber
 
-	@NotEmpty(message = "username should not be empty")
+	//@NotEmpty(message = "username should not be empty")
 	private String username; // login-username
 
-	@NotEmpty(message = "busnumber should not be empty")
+	//@NotEmpty(message = "busnumber should not be empty")
 	private String busNumber;
 
-	@NotEmpty(message = "sourceshould not be empty")
+	//@NotEmpty(message = "source should not be empty")
 	private String source;
 
-	@NotEmpty(message = "destination should not be empty")
+	//@NotEmpty(message = "destination should not be empty")
 	private String destination;
 
-	@NotEmpty(message = "no of seats should not be empty")
+	//@NotEmpty(message = "no of seats should not be null")
 	private int numberOfSeats;
 
-	@NotEmpty(message = "amount to be paid should not be empty")
+	//@NotEmpty(message = "amount to be paid should not be null")
 	private int amountPaid;
 
 	@Column(name = "dataOfBooking")
-	@NotEmpty(message = "date should not be empty")
+	//@NotEmpty(message = "date should not be null")
 	private LocalDate date;
 
-	@NotEmpty(message = " journey Start Time should not be empty")
+	//@NotEmpty(message = " journey Start Time should not be null")
 	private LocalTime journeyStartTime;
 
-	@NotEmpty(message = " journey endTime should not be empty")
+	//@NotEmpty(message = " journey endTime should not be null")
 	private LocalTime journeyEndTime;
 
 	public Booking(int bookingId, String username, String busNumber, String source, String destination,

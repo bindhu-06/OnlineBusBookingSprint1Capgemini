@@ -1,10 +1,18 @@
 package com.cg.dto;
 
-public class BusDto {
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+
+
+public class BusDto {
+    @NotEmpty(message = "busnumber should not be null")
 	private String busNumber;
+	@NotNull(message = "fare should not be null")
 	private int fare;
-	private int totalSeats;
+	@NotNull(message = "no of seats should not be null")
+    private int totalSeats;
+	@NotNull(message = "busRouteId should not be null")
 	private int busRouteId;
 
 	public BusDto(String busNumber, int fare, int totalSeats, int busRouteId) {

@@ -10,6 +10,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+/*************************************************
+ * @author Bindhu Pandrangi
+ * 
+ * Description : This class is used fo entity mapping and generate getters and setter for BusOperatorRequest.
+ *
+ */
 @Entity
 @Table(name="busoperatorrequest4")
 
@@ -19,21 +25,22 @@ public class BusOperatorRequest {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int busoperatorrequestId;
 
-	@NotEmpty(message = "busoperator username should not be empty")
+	//@NotEmpty(message = "busoperator username should not be empty")
 	private String busOperatorUsername;
 
-	@NotEmpty(message = "request messeage should not be empty")
+	//@NotEmpty(message = "request messeage should not be empty")
 	private String requestMsg;
 
-	@NotEmpty(message = "request for message should not be empty")
+	//@NotEmpty(message = "request for message should not be empty")
 	private String requestFor; // Possible values deleteBus,update Fare,Change Route , Change Time
 
-	@NotEmpty(message = "status should not be empty")
+	//@NotEmpty(message = "status should not be empty")
 	private boolean status; // approved = true , unapproved = false
 
-	@NotEmpty(message = "date should not be empty")
+	//@NotEmpty(message = "date should not be null")
 	private LocalDate requestDate;
-
+	
+	//@NotEmpty(message = "bus should not be null")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Bus bus;
 

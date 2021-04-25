@@ -11,6 +11,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
+/************************************************
+ * @author Bindhu Pandrangi
+ * 
+ * Description : This class is used fo entity mapping and generate getters and setter for BusOperator.
+ * 
+ */
 @Entity
 @Table(name = "busoperator4")
 
@@ -21,12 +27,13 @@ public class BusOperator {
 	private int busopeartorId;
 
 	@Column(unique = true)
-	@NotEmpty(message = "username should not be empty")
+	//@NotEmpty(message = "username should not be empty")
 	private String busOperatorUsername;
 
-	@NotEmpty(message = "password should not be empty")
+	//@NotEmpty(message = "password should not be empty")
 	private String password;
 
+	//@NotEmpty(message = "Bus should not be null")
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Bus> bus;
 

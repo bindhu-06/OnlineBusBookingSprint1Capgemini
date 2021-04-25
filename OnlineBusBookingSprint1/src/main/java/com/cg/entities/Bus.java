@@ -9,6 +9,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+/******************************************************
+ * @author Bindhu Pandrangi
+ * 
+ * Description : This class is used fo entity mapping and generate getters and setter for Bus.
+ *
+ */
 @Entity
 @Table(name="bus4")
 
@@ -19,19 +25,19 @@ public class Bus {
 
 	private int busId;
 
-	@NotEmpty(message = "busnumber should not be empty")
+	//@NotEmpty(message = "busnumber should not be empty")
 	private String busNumber;
 
 	@OneToOne
 	@JoinColumn(name = "busrouteId")
 
-	@NotEmpty(message = "busroute should not be empty")
+//	@NotEmpty(message = "busroute should not be null")
 	private BusRoute busRoute;
 
-	@NotEmpty(message = "no of seats should not be empty")
+	//@NotEmpty(message = "no of seats should not be null")
 	private int totalSeats;
 
-	@NotEmpty(message = "fare should not be empty")
+	//@NotEmpty(message = "fare should not be null")
 	private int fare;
 
 	public Bus(int busId, String busNumber, BusRoute busRoute, int totalSeats, int fare) {

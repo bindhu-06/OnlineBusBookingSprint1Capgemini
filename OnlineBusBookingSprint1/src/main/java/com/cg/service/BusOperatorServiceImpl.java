@@ -19,8 +19,8 @@ import com.cg.exception.InvalidUsernameException;
   /****************************************
    * 
    * @author Bindhu Pandrangi
-   * 
-   * Description : This is a class for service implementation for BusOperator, Bus, BusRoute entities
+   *
+   * Description : This is a class for service implementation for BusOperator, Bus, BusRoute entities.
    *
    */
 
@@ -36,6 +36,11 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 	
 	@Autowired
 	BusRouteI busroutei;
+	/*******************************************************
+	 * Method : addBusOperator
+	 * Description: Method is created to add new BusOperator 
+	 * Created Date: 19 April 2021
+	 */
 	
 	@Override
 	public BusOperator addBusOperator(BusOperatorDto busoperatordto) {
@@ -47,12 +52,23 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 		
 	}
 
+	/***********************************************************
+	 * Method : getRevenueByBusRoute
+	 * Description: Method is created to get revenue byBusRoute
+	 * Created Date: 19 April 2021
+	 */
 	@Override
 	public List<Booking> getRevenueByBusRoute(String routeName) {
 		
 		return busoperatori.findRevenueByBusRouteRouteName(routeName);
 		
 	}
+	
+	/***************************************************************
+	 * Method : getMonthlyRevenueByBusRoute
+	 * Description: Method is created to getmonthly revenue by BusRoute
+	 * Created Date: 19 April 2021 
+	 */
 
 	@Override
 	public List<Booking> getMonthlyRevenueByBusRoute(String routeName, int month) {
@@ -60,6 +76,12 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 		return busoperatori.findMonthlyRevenueByBusRouteRouteName(routeName, month);
 		
 	}
+	
+	/*********************************************************************
+	 * Method : getRevenueByBusRouteAndDate
+	 * Description: Method is created to get daily revenue by BusRoute
+	 * Created Date: 19 April 2021 
+	 */
 
 	@Override
 	public List<Booking> getRevenueByBusRouteAndDate(String routeName, LocalDate date) {
@@ -67,13 +89,24 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 		return busoperatori.getRevenueByBusRouteAndDate(routeName, date);
 		
 	}
-
+	
+   /*******************************************************************
+    * Method :  getYearlyRevenueByBusRoute
+    * Description: Method is created to get yearly revenue by BusRoute
+    *  Created Date: 19 April 2021
+    */
 	@Override
 	public List<Booking> getYearlyRevenueByBusRoute(String routeName, int year) {
 		
 		return busoperatori.getYearlyRevenueByBusRoute(routeName, year);
 		
 	}
+	
+	/*************************************************
+	 * Method : addBus
+	 * Description: Method is created to add new Bus
+	 * Created Date: 19 April 2021
+	 */
 
 	@Override
 	public void addBus(BusDto busdto) {
@@ -87,6 +120,12 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 		busi.save(bus);
 		
 	}
+	
+	/*************************************************************
+	 * Method : addBusRoute
+	 * Description: Method is created to add new BusRoute
+	 * Created Date : 20 April 2021
+	 */
 
 	@Override
 	public void addBusRoute(BusRouteDto busroutedto) {
@@ -99,6 +138,11 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 		
 	}
 
+	/************************************************************
+	 * Method : updatePassword
+	 * Description: Method is created to update password
+	 * Created Date : 20 April 2021
+	 */
 	@Override
 	public void updatePassword(String Username, String newpassword) {
 		
