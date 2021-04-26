@@ -1,13 +1,14 @@
 package com.cg;
 
-import java.util.List;
+
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.cg.dto.BusDto;
 import com.cg.dto.BusOperatorDto;
-import com.cg.entities.Bus;
-import com.cg.entities.BusRoute;
+import com.cg.exception.InvalidUsernameException;
 import com.cg.service.IBusOperatorService;
 
 @SpringBootTest
@@ -17,11 +18,22 @@ class OnlineBusBookingSprint1ApplicationTests {
 	IBusOperatorService  ibusoperatorservice;
 	@Test
 	void addBusOperatorTest() {
-		BusRoute busroute = new BusRoute(1,"aa","hyd","vij");
-		Bus bus= new Bus (1,"Ap123",busroute,60,600);
-		BusOperatorDto busoperatordto = new BusOperatorDto ("aaab","bbbb");
-		assertEquals("aaab",ibusoperatorservice.addBusOperator(busoperatordto).getBusOperatorUsername());
+	
+		BusOperatorDto busoperatordto = new BusOperatorDto ("srinivas","bindhu1234");
+		ibusoperatorservice.addBusOperator(busoperatordto);
+		assertEquals("srinivas",ibusoperatorservice.addBusOperator(busoperatordto).getBusOperatorUsername());
 		
+	} 
+	@Test
+	void addBusTest()
+	{
+	    BusDto busdto=new BusDto("Ap123",600,60,56);
+		assertEquals(56,ibusoperatorservice.addBus(busdto).getBusId());
+	}
+	@Test
+	void updatePasswordTest()
+	{
+		assertThrows(InvalidUsernameException.class,()->ibusoperatorservice.updatePassword("","1234"));
 	}
 
 }

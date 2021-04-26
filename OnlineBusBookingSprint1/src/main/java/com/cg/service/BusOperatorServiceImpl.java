@@ -4,13 +4,14 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.cg.dao.BusI;
 import com.cg.dao.BusOperatorI;
 import com.cg.dao.BusRouteI;
 import com.cg.dto.BusDto;
 import com.cg.dto.BusOperatorDto;
 import com.cg.dto.BusRouteDto;
-import com.cg.entities.Booking;
 import com.cg.entities.Bus;
 import com.cg.entities.BusOperator;
 import com.cg.entities.BusRoute;
@@ -42,6 +43,7 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 	 * Created Date: 19 April 2021
 	 */
 	
+	@Transactional
 	@Override
 	public BusOperator addBusOperator(BusOperatorDto busoperatordto) {
 		
@@ -57,8 +59,10 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 	 * Description: Method is created to get revenue byBusRoute
 	 * Created Date: 19 April 2021
 	 */
+	
+	@Transactional
 	@Override
-	public List<Booking> getRevenueByBusRoute(String routeName) {
+	public List<Float> getRevenueByBusRoute(String routeName) {
 		
 		return busoperatori.findRevenueByBusRouteRouteName(routeName);
 		
@@ -69,9 +73,10 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 	 * Description: Method is created to getmonthly revenue by BusRoute
 	 * Created Date: 19 April 2021 
 	 */
-
+	
+	@Transactional
 	@Override
-	public List<Booking> getMonthlyRevenueByBusRoute(String routeName, int month) {
+	public List<Float> getMonthlyRevenueByBusRoute(String routeName, int month) {
 		
 		return busoperatori.findMonthlyRevenueByBusRouteRouteName(routeName, month);
 		
@@ -83,8 +88,9 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 	 * Created Date: 19 April 2021 
 	 */
 
+	@Transactional
 	@Override
-	public List<Booking> getRevenueByBusRouteAndDate(String routeName, LocalDate date) {
+	public List<Float> getRevenueByBusRouteAndDate(String routeName, LocalDate date) {
 		
 		return busoperatori.getRevenueByBusRouteAndDate(routeName, date);
 		
@@ -95,8 +101,10 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
     * Description: Method is created to get yearly revenue by BusRoute
     *  Created Date: 19 April 2021
     */
+	
+	@Transactional
 	@Override
-	public List<Booking> getYearlyRevenueByBusRoute(String routeName, int year) {
+	public List<Float> getYearlyRevenueByBusRoute(String routeName, int year) {
 		
 		return busoperatori.getYearlyRevenueByBusRoute(routeName, year);
 		
@@ -108,8 +116,9 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 	 * Created Date: 19 April 2021
 	 */
 
+	@Transactional
 	@Override
-	public void addBus(BusDto busdto) {
+	public Bus addBus(BusDto busdto) {
 		
 		Bus bus = new Bus();
 		BusRoute busroute = busroutei.findById(busdto.getBusRouteId()).get();
@@ -117,7 +126,7 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 		bus.setFare(busdto.getFare());
 		bus.setTotalSeats(busdto.getTotalSeats());
 		bus.setBusRoute(busroute);
-		busi.save(bus);
+		return busi.save(bus);
 		
 	}
 	
@@ -127,14 +136,15 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 	 * Created Date : 20 April 2021
 	 */
 
+	@Transactional
 	@Override
-	public void addBusRoute(BusRouteDto busroutedto) {
+	public BusRoute addBusRoute(BusRouteDto busroutedto) {
 		
 		BusRoute busroute = new BusRoute();
 		busroute.setDestination(busroutedto.getDestination());
 		busroute.setRouteName(busroutedto.getRouteName());
 		busroute.setSource(busroutedto.getSource());
-		busroutei.save(busroute);
+		return busroutei.save(busroute);
 		
 	}
 
@@ -143,6 +153,8 @@ public class BusOperatorServiceImpl implements IBusOperatorService {
 	 * Description: Method is created to update password
 	 * Created Date : 20 April 2021
 	 */
+	
+	@Transactional
 	@Override
 	public void updatePassword(String Username, String newpassword) {
 		

@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /************************************************
@@ -27,13 +26,12 @@ public class BusOperator {
 	private int busopeartorId;
 
 	@Column(unique = true)
-	//@NotEmpty(message = "username should not be empty")
+	
 	private String busOperatorUsername;
 
-	//@NotEmpty(message = "password should not be empty")
+	
 	private String password;
 
-	//@NotEmpty(message = "Bus should not be null")
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Bus> bus;
 

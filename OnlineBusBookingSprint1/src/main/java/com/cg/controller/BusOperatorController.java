@@ -1,6 +1,7 @@
 package com.cg.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,13 +17,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
+import com.cg.dto.BookingDto;
 import com.cg.dto.BusDto;
 import com.cg.dto.BusOperatorDto;
 import com.cg.dto.BusRouteDto;
-import com.cg.entities.Booking;
 import com.cg.exception.BusOperatorValidationException;
 import com.cg.exception.InvalidBusOperatorException;
 import com.cg.exception.InvalidRouteNameException;
+import com.cg.service.BookingServiceImpl;
 import com.cg.service.BusOperatorServiceImpl;
 
 /***********************************************************8
@@ -41,6 +43,8 @@ public class BusOperatorController {
 	@Autowired
 
 	BusOperatorServiceImpl busoperatorserviceimpl;
+	@Autowired
+	BookingServiceImpl bookingserviseimpl;
 
 	/*****************************************************************************
 	 * Method: addBusOperator 
@@ -86,10 +90,10 @@ public class BusOperatorController {
 	 */
 
 	@GetMapping(value = "/getrevenuebyroutename/{routeName}")
-	public List<Booking> getRevenueByBusRoute(@Valid @PathVariable String routeName) {
+	public List<Float> getRevenueByBusRoute(@Valid @PathVariable String routeName) {
 		try {
 
-			List<Booking> revenuebyroutename = busoperatorserviceimpl.getRevenueByBusRoute(routeName);
+			List<Float> revenuebyroutename = busoperatorserviceimpl.getRevenueByBusRoute(routeName);
 			return revenuebyroutename;
 		} catch (InvalidRouteNameException exception) {
 			throw new InvalidRouteNameException("no Route found");
@@ -108,10 +112,10 @@ public class BusOperatorController {
 	 */
 
 	@GetMapping(value = "/getmonthlyrevenuebyroutename/{routeName}/month/{month}")
-	public List<Booking> getMonthlyRevenueByBusRoute(@Valid @PathVariable String routeName, @PathVariable int month) {
+	public List<Float> getMonthlyRevenueByBusRoute(@Valid @PathVariable String routeName, @PathVariable int month) {
 		try {
 
-			List<Booking> monthlyrevenuebyroutename = busoperatorserviceimpl.getMonthlyRevenueByBusRoute(routeName,
+			List<Float> monthlyrevenuebyroutename = busoperatorserviceimpl.getMonthlyRevenueByBusRoute(routeName,
 					month);
 			return monthlyrevenuebyroutename;
 		} catch (InvalidRouteNameException exception) {
@@ -131,10 +135,10 @@ public class BusOperatorController {
 	 */
 
 	@GetMapping(value = "/getdaterevenuebyroutename/{routeName}/date/{date}")
-	public List<Booking> getRevenueByBusRouteAndDate(@Valid @PathVariable String routeName, @PathVariable String date) {
+	public List<Float> getRevenueByBusRouteAndDate(@Valid @PathVariable String routeName, @PathVariable String date) {
 		try {
 			LocalDate dt = LocalDate.parse(date);
-			List<Booking> revenuebyroutenameandDate = busoperatorserviceimpl.getRevenueByBusRouteAndDate(routeName, dt);
+			List<Float> revenuebyroutenameandDate = busoperatorserviceimpl.getRevenueByBusRouteAndDate(routeName, dt);
 			return revenuebyroutenameandDate;
 		} catch (InvalidRouteNameException exception) {
 			throw new InvalidRouteNameException("no Route found");
@@ -153,11 +157,11 @@ public class BusOperatorController {
 	 */
 
 	@GetMapping(value = "/getyearlyrevenuebyroutename/{routeName}/year/{year}")
-	public List<Booking> getYearlyRevenueByBusRoute(@Valid @PathVariable String routeName, @PathVariable int year) {
+	public List<Float> getYearlyRevenueByBusRoute(@Valid @PathVariable String routeName, @PathVariable int year) {
 
 		try {
 
-			List<Booking> yearlyrevenuebyroutename = busoperatorserviceimpl.getYearlyRevenueByBusRoute(routeName, year);
+			List<Float> yearlyrevenuebyroutename = busoperatorserviceimpl.getYearlyRevenueByBusRoute(routeName, year);
 			return yearlyrevenuebyroutename;
 		} catch (InvalidRouteNameException exception) {
 			throw new InvalidRouteNameException("no Route found");
@@ -267,6 +271,39 @@ public class BusOperatorController {
 		}
 
 		return new ResponseEntity<Object>("Updatedsuccessfully", HttpStatus.OK);
+	}
+	
+	/*****************************************************************************
+	 * Method: addBus 
+	 * Description: Method is created to add new Booking
+	 * @param busdto
+	 * @returnResponseEntity
+	 * @PostMapping : Annotation for mapping HTTP POST requests onto add Booking details 
+	 * Created Date : 23 April 2021
+	 */
+	@PostMapping(value = "/addNewBooking")
+	public ResponseEntity<Object> addBooking(@Valid @RequestBody BookingDto bookingdto,
+			BindingResult bindingresult) {
+		if (bindingresult.hasErrors()) {
+			System.out.println("Some errors exist!");
+			List<FieldError> fieldErrors = bindingresult.getFieldErrors();
+
+			List<String> errMessages = new ArrayList<>();
+			for (FieldError fe : fieldErrors) {
+				errMessages.add(fe.getDefaultMessage());
+			}
+			throw new BusOperatorValidationException(errMessages);
+
+		}
+		try {
+			bookingserviseimpl.addBooking(bookingdto);
+		}
+
+		catch (InvalidBusOperatorException exception) {
+			throw new InvalidBusOperatorException("one or more entered field contains invalid object");
+
+		}
+		return new ResponseEntity<Object>("Added successfully", HttpStatus.CREATED);
 	}
 
 }

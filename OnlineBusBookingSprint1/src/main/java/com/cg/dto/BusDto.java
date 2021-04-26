@@ -3,9 +3,8 @@ package com.cg.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-
-
 public class BusDto {
+	
     @NotEmpty(message = "busnumber should not be null")
 	private String busNumber;
 	@NotNull(message = "fare should not be null")
